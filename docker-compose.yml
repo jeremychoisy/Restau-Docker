@@ -1,0 +1,15 @@
+version: '3'
+services:
+  resto-server:
+    build: ./serverVue
+    container_name: resto-server
+    ports:
+      - 5000:5000
+
+  resto-app:
+    build: ./RestauVue
+    container_name: resto-app
+    ports:
+      - 80:80
+    links:
+      - resto-server
