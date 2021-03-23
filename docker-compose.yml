@@ -12,18 +12,18 @@ services:
     build: ./RestauVue
     container_name: resto-app
     networks:
-      - resto-network
+       - resto-network
 
   rp:
-    build: ./nginx
-    container_name: nginx
+    container_name: restau-docker_rp
+    image: nginx
     ports:
-      - 80:80
-    depends_on:
-      - resto-server
-      - resto-app
+       - "49161:80"
+    volumes: 
+       - ./nginx/:/etc/nginx/conf.d
     networks:
       - resto-network
 
 networks:
   resto-network:
+        driver: bridge
