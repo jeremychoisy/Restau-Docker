@@ -5,11 +5,25 @@ services:
     container_name: resto-server
     ports:
       - 5000:5000
+    networks:
+      - resto-network
 
   resto-app:
     build: ./RestauVue
     container_name: resto-app
+    networks:
+      - resto-network
+
+  rp:
+    build: ./nginx
+    container_name: nginx
     ports:
       - 80:80
-    links:
+    depends_on:
       - resto-server
+      - resto-app
+    networks:
+      - resto-network
+
+networks:
+  resto-network:
